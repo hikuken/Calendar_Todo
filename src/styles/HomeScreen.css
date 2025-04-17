@@ -1,3 +1,10 @@
+/* 時間表示のスタイル */
+.todo-time {
+  margin-right: 8px;
+  font-size: 0.9em;
+  color: #555;
+}
+
 .home-screen {
   padding: 20px;
   margin-left: 250px; /* サイドバーの幅と同じ */

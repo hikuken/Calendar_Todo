@@ -45,8 +45,16 @@ const HomeScreen = () => {
             <ul className="event-list">
               {todayEvents.map(event => (
                 <li key={event.id} className="event-item">
-                  <div className="event-title">{event.title}</div>
-                  <div className="event-description">{event.description}</div>
+                  <div className="event-title">
+                    {event.title}
+                    {event.startDate && event.startTime && event.endDate && event.endTime && (
+                      <span className="event-time">
+                        {event.startDate === event.endDate
+                          ? `${event.startTime}～${event.endTime}`
+                          : `${event.startDate} ${event.startTime}～${event.endDate} ${event.endTime}`}
+                      </span>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -63,6 +71,13 @@ const HomeScreen = () => {
                 <li key={todo.id} className={`todo-item priority-${todo.priority}`}>
                   <div className="todo-title">{todo.title}</div>
                   <div className="todo-details">
+                    {todo.startDate && todo.startTime && todo.endDate && todo.endTime && (
+                      <span className="todo-time">
+                        {todo.startDate === todo.endDate
+                          ? `${todo.startTime}～${todo.endTime}`
+                          : `${todo.startDate} ${todo.startTime}～${todo.endDate} ${todo.endTime}`}
+                      </span>
+                    )}
                     <span className="todo-priority">{getPriorityLabel(todo.priority)}</span>
                     <span className="todo-assignee">{todo.assignee}</span>
                   </div>

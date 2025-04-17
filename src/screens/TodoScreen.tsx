@@ -22,6 +22,10 @@ const TodoScreen = () => {
   const [newTodo, setNewTodo] = useState<Omit<TodoItem, 'id'>>({
     title: '',
     dueDate: new Date().toISOString().split('T')[0],
+    startDate: new Date().toISOString().split('T')[0],
+    startTime: '',
+    endDate: new Date().toISOString().split('T')[0],
+    endTime: '',
     description: '',
     priority: 'medium',
     assignee: '',
@@ -73,6 +77,10 @@ const TodoScreen = () => {
     setNewTodo({
       title: '',
       dueDate: new Date().toISOString().split('T')[0],
+      startDate: new Date().toISOString().split('T')[0],
+      startTime: '',
+      endDate: new Date().toISOString().split('T')[0],
+      endTime: '',
       description: '',
       priority: 'medium',
       assignee: '',
@@ -179,6 +187,56 @@ const TodoScreen = () => {
                 </select>
               </div>
             </div>
+
+            <div className="form-group">
+              <label>開始日時</label>
+              <div className="form-row">
+                <div className="form-group">
+                  <input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    value={editingTodo ? editingTodo.startDate || '' : newTodo.startDate || ''}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <input
+                    type="time"
+                    id="startTime"
+                    name="startTime"
+                    value={editingTodo ? editingTodo.startTime || '' : newTodo.startTime || ''}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div className="form-group">
+              <label>終了日時</label>
+              <div className="form-row">
+                <div className="form-group">
+                  <input
+                    type="date"
+                    id="endDate"
+                    name="endDate"
+                    value={editingTodo ? editingTodo.endDate || '' : newTodo.endDate || ''}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <input
+                    type="time"
+                    id="endTime"
+                    name="endTime"
+                    value={editingTodo ? editingTodo.endTime || '' : newTodo.endTime || ''}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+            </div>
             
             <div className="form-row">
               <div className="form-group">
@@ -257,6 +315,13 @@ const TodoScreen = () => {
                     {todo.dueDate && (
                       <div className="todo-due-date">
                         期限: {new Date(todo.dueDate).toLocaleDateString('ja-JP')}
+                        {todo.startDate && todo.startTime && todo.endDate && todo.endTime && (
+                          <span className="todo-time">
+                            {todo.startDate === todo.endDate
+                              ? `${todo.startTime}～${todo.endTime}`
+                              : `${todo.startDate} ${todo.startTime}～${todo.endDate} ${todo.endTime}`}
+                          </span>
+                        )}
                       </div>
                     )}
                     
@@ -310,6 +375,13 @@ const TodoScreen = () => {
                     {todo.dueDate && (
                       <div className="todo-due-date">
                         期限: {new Date(todo.dueDate).toLocaleDateString('ja-JP')}
+                        {todo.startDate && todo.startTime && todo.endDate && todo.endTime && (
+                          <span className="todo-time">
+                            {todo.startDate === todo.endDate
+                              ? `${todo.startTime}～${todo.endTime}`
+                              : `${todo.startDate} ${todo.startTime}～${todo.endDate} ${todo.endTime}`}
+                          </span>
+                        )}
                       </div>
                     )}
                     
@@ -363,6 +435,13 @@ const TodoScreen = () => {
                     {todo.dueDate && (
                       <div className="todo-due-date">
                         期限: {new Date(todo.dueDate).toLocaleDateString('ja-JP')}
+                        {todo.startDate && todo.startTime && todo.endDate && todo.endTime && (
+                          <span className="todo-time">
+                            {todo.startDate === todo.endDate
+                              ? `${todo.startTime}～${todo.endTime}`
+                              : `${todo.startDate} ${todo.startTime}～${todo.endDate} ${todo.endTime}`}
+                          </span>
+                        )}
                       </div>
                     )}
                     
@@ -415,6 +494,13 @@ const TodoScreen = () => {
                     {todo.dueDate && (
                       <div className="todo-due-date">
                         期限: {new Date(todo.dueDate).toLocaleDateString('ja-JP')}
+                        {todo.startDate && todo.startTime && todo.endDate && todo.endTime && (
+                          <span className="todo-time">
+                            {todo.startDate === todo.endDate
+                              ? `${todo.startTime}～${todo.endTime}`
+                              : `${todo.startDate} ${todo.startTime}～${todo.endDate} ${todo.endTime}`}
+                          </span>
+                        )}
                       </div>
                     )}
                     

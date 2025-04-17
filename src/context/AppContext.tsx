@@ -5,6 +5,10 @@ export interface TodoItem {
   id: string;
   title: string;
   dueDate: string;
+  startDate?: string; // 開始日（YYYY-MM-DD形式）
+  startTime?: string; // 開始時間（HH:MM形式）
+  endDate?: string;   // 終了日（YYYY-MM-DD形式）
+  endTime?: string;   // 終了時間（HH:MM形式）
   description: string;
   priority: 'high' | 'medium' | 'low';
   assignee: string;
@@ -15,8 +19,15 @@ export interface TodoItem {
 export interface CalendarEvent {
   id: string;
   title: string;
-  date: string;
+  date: string;       // 主表示日（YYYY-MM-DD形式）
+  startDate?: string; // 開始日（YYYY-MM-DD形式）
+  startTime?: string; // 開始時間（HH:MM形式）
+  endDate?: string;   // 終了日（YYYY-MM-DD形式）
+  endTime?: string;   // 終了時間（HH:MM形式）
   description: string;
+  color: string;
+  // 日をまたぐイベントの場合、関連する日付を保持
+  relatedDates?: string[];
 }
 
 // コンテキストの型定義
@@ -104,6 +115,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const addEvent = (event: Omit<CalendarEvent, 'id'>) => {
     const newEvent: CalendarEvent = {
       ...event,
+      color: event.color || '#3498db', // デフォルトの色
       id: Date.now().toString(),
     };
     setEvents(prevEvents => [...prevEvents, newEvent]);
